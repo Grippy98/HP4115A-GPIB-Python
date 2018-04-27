@@ -1,0 +1,7 @@
+DISP:BRIG 0.843 //Set Display Brightness(0-1), 3 decimal point precision
+DISP:BRIG? //Returns current display brightness value
+HCOPy:DATA? //Returns Hex Data
+HCOP:DEV:CMOD FIX
+
+:PAGE:CHAN:SMU1:INAME? //Queries the name of SMU1
+:PAGECHAN:SMU1:INAME 'ID'
