@@ -165,7 +165,7 @@ Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
 to_write = Entry(bg="white", relief=SUNKEN,width=75)
 to_write.grid(row=15,column=1, columnspan = 5)
 print(to_write.get())
-force_write_button = Button(root, text='GPIB Write', width=25, command=WriteQuery).grid(row=15, column=6)
+force_write_button = Button(root, text='GPIB Write', width=25, height=2, command=WriteQuery).grid(row=15, column=6, rowspan=2)
 
 
 Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0)
