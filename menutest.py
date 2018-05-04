@@ -43,18 +43,19 @@ def OpenFile():
     name = askopenfilename()
     print (name)
 def About():
-    print ("HP4115A Controller... Rev0")
+    print ("HP4155A Controller... Rev0")
 
-def WriteQuery(user_input):
-	if(user_input.lower() != "exit"):
-		subActive = True
-		my_instrument.write(user_input)
-		try:
-			global reply
-			reply = my_instrument.read()
-			print(reply)
-		except:
-			pass
+def WriteQuery():
+	my_instrument.write(to_write.get())
+	print("Wrote: " + to_write.get() + "\n")
+	try:
+		global reply
+		reply = my_instrument.read()
+		print(reply)
+		receivedBox = Label(text = reply, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
+		receivedBox.insert(reply)
+	except:
+		pass
     
 root = Tk()
 root.title("HP4115A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
@@ -89,7 +90,8 @@ MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
 FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
 
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
-Entry(bg="white", relief=SUNKEN,width=15).grid(row=0,column=1)
+receivedBox = Entry(bg="white", relief=SUNKEN,width=15)
+receivedBox.grid(row=0,column=1)
 writebutton = Button(root, text='Write', width=6, command=root.destroy).grid(row=0, column=2)
 
 choices = ('SWEEP', '???', '???')
@@ -120,11 +122,13 @@ for c in range(0, len(UNIT)):
     r = r + 1
 
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
-to_write = Entry(bg="white", relief=SUNKEN,width=75).grid(row=15,column=1, columnspan = 5)
-force_write_button = Button(root, text='GPIB Write', width=25, command=WriteQuery(to_write)).grid(row=15, column=6)
+to_write = Entry(bg="white", relief=SUNKEN,width=75)
+to_write.grid(row=15,column=1, columnspan = 5)
+print(to_write.get())
+force_write_button = Button(root, text='GPIB Write', width=25, command=WriteQuery).grid(row=15, column=6)
 
 
 Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0)
-Label(text = reply, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
+
 
 mainloop()
