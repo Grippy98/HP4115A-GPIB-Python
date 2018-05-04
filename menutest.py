@@ -31,6 +31,8 @@ subActive = True
 ##except NameError:
 ##    pass
 
+reply = "NONE" #Default
+
 def getChan(): #Displays Channel Data
 	my_instrument.write(":PAGE:CHAN")
 	print(my_instrument.query("HCOPy:DATA?"))
@@ -42,6 +44,17 @@ def OpenFile():
     print (name)
 def About():
     print ("HP4115A Controller... Rev0")
+
+def WriteQuery(user_input):
+	if(user_input.lower() != "exit"):
+		subActive = True
+		my_instrument.write(user_input)
+		try:
+			global reply
+			reply = my_instrument.read()
+			print(reply)
+		except:
+			pass
     
 root = Tk()
 root.title("HP4115A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
@@ -57,6 +70,13 @@ filemenu.add_command(label="Exit", command=root.quit)
 helpmenu = Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
 helpmenu.add_command(label="About...", command=About)
+
+gomenu = Menu(go)
+go.add_cascade(label="Go", menu=gomenu)
+filemenu.add_command(label="Channel Menu", command=root.quit)
+filemenu.add_command(label="Display Menu", command=root.quit)
+filemenu.add_command(label="???", command=root.quit)
+filemenu.add_command(label="Exit", command=root.quit)
 
 colours = ['red','green','orange','white','yellow','blue']
 
@@ -77,7 +97,6 @@ var = StringVar(root)
 v_name_var = StringVar(root)
 var.set(choices[0])
 measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky="ew")
-response = "NONE" #Reserved for Instrument Response Queries
 
 Label(text="    *MEASUREMENT MODE",width=30).grid(row=2,column=0)
 Label(text=" *CHANNELS",width=15).grid(row=3,column=0)
@@ -101,9 +120,11 @@ for c in range(0, len(UNIT)):
     r = r + 1
 
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
-Entry(bg="white", relief=SUNKEN,width=75).grid(row=15,column=1, columnspan = 5)
+to_write = Entry(bg="white", relief=SUNKEN,width=75).grid(row=15,column=1, columnspan = 5)
+force_write_button = Button(root, text='GPIB Write', width=25, command=WriteQuery(to_write)).grid(row=15, column=6)
+
 
 Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0)
-Label(text = response, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
+Label(text = reply, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
 
 mainloop()
