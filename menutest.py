@@ -67,6 +67,38 @@ def getData(write):
 	except:
 		pass
 
+def Refresh_CHAN():
+	for x in range(0,4):
+		V_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":VNAME?") 
+		I_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":INAME?") 
+		MODE[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":MODE?") 
+		FCTN[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":FUNC?") 
+		pass
+
+	for x in range(0,1):
+		V_NAME[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":VNAME?") 
+		#I_NAME[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":INAME?") 
+		MODE[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":MODE?") 
+		FCTN[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":FUNC?") 
+		pass
+
+	for x in range(0,1):
+		V_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":VNAME?") 
+		#I_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":INAME?") 
+		MODE[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":MODE?") 
+		FCTN[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":FUNC?") 
+		pass
+
+	r = 5
+	for c in range(0, len(UNIT)):
+		#var.set(choices[0])
+		Label(text=UNIT[c],width=15).grid(row=r,column=0)
+		Label(text=V_NAME[c], width=15, justify='center').grid(row=r,column=1)
+		Label(text=I_NAME[c],width=15).grid(row=r,column=2)
+		Label(text=MODE[c],width=15).grid(row=r,column=3)
+		Label(text=FCTN[c],width=15).grid(row=r,column=4)
+		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
+		r = r + 1
 
     
 root = Tk()
@@ -99,17 +131,16 @@ I_NAME = ["I1", "I2", "I3", "I4", "---- ----", "---- ----", "---- ----", "---- -
 MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
 FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
 
-for x in xrange(0,3):
-	V_NAME[x] = getData("PAGE:CHAN:SMU" + x + ":VNAME?") 
-	I_NAME[x] = getData("PAGE:CHAN:SMU" + x + ":INAME?") 
-	MODE[x] = getData("PAGE:CHAN:SMU" + x + ":MODE?") 
-	FCTN[x] = getData("PAGE:CHAN:SMU" + x + ":FUNC?") 
-	pass
+#Pull In Initial Data
+
+Refresh_CHAN()
+
 
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
 receivedBox = Entry(bg="white", relief=SUNKEN,width=15)
 receivedBox.grid(row=0,column=1)
 writebutton = Button(root, text='Write', width=6, command=root.destroy).grid(row=0, column=2)
+refreshbutton =  Button(root, text='Refresh', width=6, command=Refresh_CHAN).grid(row=0, column=3)
 
 choices = ('SWEEP', '???', '???')
 var = StringVar(root)
@@ -125,18 +156,6 @@ Label(text="INAME", relief=RIDGE,width=15).grid(row=4,column=2)
 Label(text="MODE", relief=RIDGE,width=15).grid(row=4,column=3)
 Label(text="FUNCTION", relief=RIDGE,width=15).grid(row=4,column=4)
 Label(text="STANDBY", relief=RIDGE,width=15).grid(row=4,column=5)
-
-r = 5
-for c in range(0, len(UNIT)):
-	#var.set(choices[0])
-	
-    Label(text=UNIT[c],width=15).grid(row=r,column=0)
-    Label(text=V_NAME[c], width=15, justify='center').grid(row=r,column=1)
-    Label(text=I_NAME[c],width=15).grid(row=r,column=2)
-    Label(text=MODE[c],width=15).grid(row=r,column=3)
-    Label(text=FCTN[c],width=15).grid(row=r,column=4)
-    button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
-    r = r + 1
 
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
 to_write = Entry(bg="white", relief=SUNKEN,width=75)
