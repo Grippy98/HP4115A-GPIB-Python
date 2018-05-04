@@ -67,6 +67,9 @@ def getData(write):
 	except:
 		pass
 
+def UpdateCOMM():
+	getData(":PAGE:CHAN:COMM '" +  receivedBox.get() + "'")
+
 def Refresh_CHAN():
 	for x in range(0,4):
 		V_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":VNAME?") 
@@ -137,15 +140,16 @@ Refresh_CHAN()
 
 
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
-receivedBox = Entry(bg="white", relief=SUNKEN,width=15)
-receivedBox.grid(row=0,column=1)
-writebutton = Button(root, text='Write', width=6, command=root.destroy).grid(row=0, column=2)
-refreshbutton =  Button(root, text='Refresh', width=6, command=Refresh_CHAN).grid(row=0, column=3)
+receivedBox = Entry(bg="white", relief=SUNKEN,width=50)
+receivedBox.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\"", "").replace("}"," ").replace("\\", "")) #This is the type of line that requires documentation. Not gonna lie, It's a bunch of BS that shouldn't work but does. Thanks Python <3
+receivedBox.grid(row=0,column=1,columnspan = 3)
+writebutton = Button(root, text='Write', width=6, command=UpdateCOMM).grid(row=0, column=4)
+refreshbutton =  Button(root, text='Refresh', width=6, command=Refresh_CHAN).grid(row=0, column=5)
 
-choices = ('SWEEP', '???', '???')
+choices = ("SWEEP", "TBD")
 var = StringVar(root)
 v_name_var = StringVar(root)
-var.set(choices[0])
+var.set(getData(":PAGE:CHAN:MODE?").split()) #Taking advantage of split() with empty parameters to remove white spaces
 measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky="ew")
 
 Label(text="    *MEASUREMENT MODE",width=30).grid(row=2,column=0)
