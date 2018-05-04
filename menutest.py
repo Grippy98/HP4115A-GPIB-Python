@@ -72,7 +72,7 @@ menu.add_cascade(label="Help", menu=helpmenu)
 helpmenu.add_command(label="About...", command=About)
 
 gomenu = Menu(menu)
-go.add_cascade(label="Go", menu=gomenu)
+menu.add_cascade(label="Go", menu=gomenu)
 filemenu.add_command(label="Channel Menu", command=root.quit)
 filemenu.add_command(label="Display Menu", command=root.quit)
 filemenu.add_command(label="???", command=root.quit)
