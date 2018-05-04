@@ -1,5 +1,5 @@
-from Tkinter import *
-from tkFileDialog   import askopenfilename
+from tkinter import *
+#from tkFileDialog   import askopenfilename
 
 import visa
 rm = visa.ResourceManager()
@@ -36,12 +36,12 @@ def getChan(): #Displays Channel Data
 	print(my_instrument.query("HCOPy:DATA?"))
 
 def NewFile():
-    print "New File!"
+    print ("New File!")
 def OpenFile():
     name = askopenfilename()
-    print name
+    print (name)
 def About():
-    print "HP4115A Controller... Rev0"
+    print ("HP4115A Controller... Rev0")
     
 root = Tk()
 root.title("HP4115A: " + my_instrument.query('*IDN?'))
