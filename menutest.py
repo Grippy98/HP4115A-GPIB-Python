@@ -44,7 +44,7 @@ def About():
     print ("HP4115A Controller... Rev0")
     
 root = Tk()
-root.title("HP4115A: " + my_instrument.query('*IDN?'))
+root.title("HP4115A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
 menu = Menu(root)
 root.config(menu=menu)
 filemenu = Menu(menu)
