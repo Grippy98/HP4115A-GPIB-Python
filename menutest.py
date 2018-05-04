@@ -78,14 +78,14 @@ def Refresh_CHAN():
 		FCTN[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":FUNC?") 
 		pass
 
-	for x in range(0,1):
+	for x in range(0,2):
 		V_NAME[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":VNAME?") 
 		#I_NAME[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":INAME?") 
 		MODE[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":MODE?") 
 		FCTN[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":FUNC?") 
 		pass
 
-	for x in range(0,1):
+	for x in range(0,2):
 		V_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":VNAME?") 
 		#I_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":INAME?") 
 		MODE[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":MODE?") 
