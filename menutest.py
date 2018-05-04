@@ -105,7 +105,7 @@ def Refresh_CHAN():
 
     
 root = Tk()
-root.title("HP4115A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
+root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
 menu = Menu(root)
 root.config(menu=menu)
 filemenu = Menu(menu)
