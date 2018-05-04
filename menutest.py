@@ -56,6 +56,18 @@ def WriteQuery():
 		receivedBox.insert(reply)
 	except:
 		pass
+
+def getData(write):
+	my_instrument.write(write)
+	print("Wrote: " + write + "\n")
+	try:
+		reply = my_instrument.read()
+		print(reply)
+		return reply
+	except:
+		pass
+
+
     
 root = Tk()
 root.title("HP4115A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
@@ -79,8 +91,6 @@ filemenu.add_command(label="Display Menu", command=root.quit)
 filemenu.add_command(label="???", command=root.quit)
 filemenu.add_command(label="Exit", command=root.quit)
 
-colours = ['red','green','orange','white','yellow','blue']
-
 channel_definition = "V-I curve"
 
 UNIT = ["SMU1:MP", "SMU2:MP", "SMU3:MP", "SMU4:MP", "VSU1", "VSU2", "VMU1", "VMU2"]
@@ -88,6 +98,13 @@ V_NAME = ["V1", "V2", "V3", "V4", "VSU1", "VSU2", "VMU1", "VMU2"]
 I_NAME = ["I1", "I2", "I3", "I4", "---- ----", "---- ----", "---- ----", "---- ----"]
 MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
 FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
+
+for x in xrange(0,3):
+	V_NAME[x] = getData("PAGE:CHAN:SMU" + x + ":VNAME?") 
+	I_NAME[x] = getData("PAGE:CHAN:SMU" + x + ":INAME?") 
+	MODE[x] = getData("PAGE:CHAN:SMU" + x + ":MODE?") 
+	FCTN[x] = getData("PAGE:CHAN:SMU" + x + ":FUNC?") 
+	pass
 
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
 receivedBox = Entry(bg="white", relief=SUNKEN,width=15)
