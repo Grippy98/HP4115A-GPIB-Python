@@ -31,6 +31,28 @@ subActive = True
 ##except NameError:
 ##    pass
 
+#The following aren't used yet but i figured making them objects in the future makes sense
+class SMU(object):
+	name = ""
+	vname = ""
+	iname = ""
+	mode = ""
+	func = ""
+	stdby = 0
+
+class VSU(object):
+	name = ""
+	vname = ""
+	mode = ""
+	func = ""
+	stdby = 0
+
+class VMU(object):
+	name = ""
+	vname = ""
+	mode = ""
+	stdby = 0
+
 reply = "NONE" #Default
 
 def getChan(): #Displays Channel Data
@@ -96,8 +118,18 @@ def Refresh_CHAN():
 	for c in range(0, len(UNIT)):
 		#var.set(choices[0])
 		Label(text=UNIT[c],width=15).grid(row=r,column=0)
-		Label(text=V_NAME[c], width=15, justify='center').grid(row=r,column=1)
-		Label(text=I_NAME[c],width=15).grid(row=r,column=2)
+		vname = Entry(text=V_NAME[c], width=15, justify='center')
+		#V_NAME[c] = vname.get()
+		vname.delete(0,END)
+		vname.insert(0, V_NAME[c])
+		vname.grid(row=r,column=1)
+		iname = Entry(text=I_NAME[c],width=15, justify='center')
+		#if(iname.get() != I_NAME[c] and iname.get() != ""):
+		#	I_NAME[c] = iname.get()
+		#	print("New I_NAME at " + str(c) + " " + I_NAME[c])
+		iname.delete(0,END)
+		iname.insert(0, I_NAME[c])
+		iname.grid(row=r,column=2)
 		Label(text=MODE[c],width=15).grid(row=r,column=3)
 		Label(text=FCTN[c],width=15).grid(row=r,column=4)
 		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
@@ -143,8 +175,9 @@ Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
 receivedBox = Entry(bg="white", relief=SUNKEN,width=50)
 receivedBox.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\"", "").replace("}"," ").replace("\\", "")) #This is the type of line that requires documentation. Not gonna lie, It's a bunch of BS that shouldn't work but does. Thanks Python <3
 receivedBox.grid(row=0,column=1,columnspan = 3)
-writebutton = Button(root, text='Write', width=6, command=UpdateCOMM).grid(row=0, column=4)
-refreshbutton =  Button(root, text='Refresh', width=6, command=Refresh_CHAN).grid(row=0, column=5)
+writebutton = Button(root, text='Write', width=15, command=UpdateCOMM).grid(row=0, column=4)
+refreshbutton =  Button(root, text='Refresh', width=15, command=Refresh_CHAN).grid(row=0, column=5)
+writeAllButton = Button(root, text='Write ALL', width=30, command=Refresh_CHAN).grid(row=0, column=6, columnspan=2, rowspan =2)
 
 choices = ("SWEEP", "TBD")
 var = StringVar(root)
@@ -165,7 +198,7 @@ Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
 to_write = Entry(bg="white", relief=SUNKEN,width=75)
 to_write.grid(row=15,column=1, columnspan = 5)
 print(to_write.get())
-force_write_button = Button(root, text='GPIB Write', width=25, height=2, command=WriteQuery).grid(row=15, column=6, rowspan=2)
+force_write_button = Button(root, text='GPIB Write', width=30, height=2, command=WriteQuery).grid(row=15, column=6, rowspan=2)
 
 
 Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0)
