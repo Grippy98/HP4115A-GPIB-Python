@@ -3,33 +3,30 @@ from tkinter import *
 
 import visa
 rm = visa.ResourceManager()
-
 devices = rm.list_resources()
 
 consoleSeq = "~: " #Just a nice way to represenet input
 
-print("Please enter device number to interface with: \n")
+print("\nPlease enter device number to interface with: \n")
 
 devices = rm.list_resources()
 
+#Quit execution if no devices found
+if len(devices) == 0:
+	print("No devices found... Exiting...\n")
+	quit() #Terminate program
+	pass
+
+#Print the list of devices
 for x in range(0,len(devices)):
 	print(str(x) + " - " + devices[x])	
 	pass
 
-number = input(consoleSeq)
+#Open the actual devices
+my_instrument = rm.open_resource(devices[int(input(consoleSeq))])
 
-my_instrument = rm.open_resource(devices[int(number)])
-
+#Get Instrument Model
 print("\nConnected to Instrument: " + my_instrument.query('*IDN?') + "\n")
-
-active = True
-subActive = True
-
-#The following is to make input work in python 2
-##try:
-##    input = raw_input
-##except NameError:
-##    pass
 
 #The following aren't used yet but i figured making them objects in the future makes sense
 class SMU(object):
