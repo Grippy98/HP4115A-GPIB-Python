@@ -128,19 +128,20 @@ def Refresh_CHAN():
 	#Note c + 5 is used as a offset
 	for c in range(0, len(UNIT)):
 		#var.set(choices[0])
-		Label(text=UNIT[c],width=15).grid(row=r,column=0)
+		row_offset = c + 5
+		Label(text=UNIT[c],width=15).grid(row=row_offset,column=0)
 		vname = Entry(text=V_NAME[c], width=15, justify='center')
 		#V_NAME[c] = vname.get()
 		vname.delete(0,END)
 		vname.insert(0, V_NAME[c])
-		vname.grid(row=(c + 5),column=1)
+		vname.grid(row=row_offset,column=1)
 		iname = Entry(text=I_NAME[c],width=15, justify='center')
 		#if(iname.get() != I_NAME[c] and iname.get() != ""):
 		#	I_NAME[c] = iname.get()
 		#	print("New I_NAME at " + str(c) + " " + I_NAME[c])
 		iname.delete(0,END)
 		iname.insert(0, I_NAME[c])
-		iname.grid(row=(c + 5),column=2)
+		iname.grid(row=row_offset,column=2)
 		Label(text=MODE[c],width=15).grid(row=r,column=3)
 		Label(text=FCTN[c],width=15).grid(row=r,column=4)
 		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
