@@ -22,8 +22,9 @@ for x in range(0,len(devices)):
 	print(str(x) + " - " + devices[x])	
 	pass
 
+device_number = int(input(consoleSeq))
 #Open the actual devices
-my_instrument = rm.open_resource(devices[int(input(consoleSeq))])
+my_instrument = rm.open_resource(devices[device_number])
 
 #Get Instrument Model
 print("\nConnected to Instrument: " + my_instrument.query('*IDN?') + "\n")
@@ -134,7 +135,7 @@ def Refresh_CHAN():
 
     
 root = Tk()
-root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[int(number)])
+root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number])
 menu = Menu(root)
 root.config(menu=menu)
 filemenu = Menu(menu)
