@@ -51,45 +51,57 @@ class VMU(object):
 	mode = ""
 	stdby = 0
 
-reply = "NONE" #Default
+reply = "NONE" #Default reply from the instrument... in case it doesn't actually reply any data
+
 
 def getChan(): #Displays Channel Data
 	my_instrument.write(":PAGE:CHAN")
 	print(my_instrument.query("HCOPy:DATA?"))
 
+#Some of these are semi-placeholder functions
 def NewFile():
     print ("New File!")
 def OpenFile():
     name = askopenfilename()
     print (name)
+
+#About page from top File menu
 def About():
     print ("HP4155A Controller... Rev0")
 
+#Write a querry to the instrument
 def WriteQuery():
 	my_instrument.write(to_write.get())
 	print("Wrote: " + to_write.get() + "\n")
+	#This needs to be in try-catch form because the instrument doesn't always return data in the expected format
 	try:
-		global reply
+		global reply #I severely questions this... need to look into when it's easier to debug
 		reply = my_instrument.read()
 		print(reply)
 		receivedBox = Label(text = reply, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
 		receivedBox.insert(reply)
+	#Nothing to really error handle, just give up on the command... this will introduce a slight delay
 	except:
 		pass
 
+#Way of querying instrument data... one of two
 def getData(write):
 	my_instrument.write(write)
 	print("Wrote: " + write + "\n")
+	#Try-catch because instrument doesn't always reply in a supported format and will crash NI Backend otherwise
 	try:
 		reply = my_instrument.read()
 		print(reply)
 		return reply
+	#Nothing to really error handle, just give up on the command... this will introduce a slight delay
 	except:
 		pass
 
 def UpdateCOMM():
 	getData(":PAGE:CHAN:COMM '" +  receivedBox.get() + "'")
 
+#Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
+#Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
 def Refresh_CHAN():
 	for x in range(0,4):
 		V_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":VNAME?") 
@@ -112,7 +124,8 @@ def Refresh_CHAN():
 		FCTN[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":FUNC?") 
 		pass
 
-	r = 5
+	#Write the found vallues to the menu interface
+	#Note c + 5 is used as a offset
 	for c in range(0, len(UNIT)):
 		#var.set(choices[0])
 		Label(text=UNIT[c],width=15).grid(row=r,column=0)
@@ -120,20 +133,18 @@ def Refresh_CHAN():
 		#V_NAME[c] = vname.get()
 		vname.delete(0,END)
 		vname.insert(0, V_NAME[c])
-		vname.grid(row=r,column=1)
+		vname.grid(row=(c + 5),column=1)
 		iname = Entry(text=I_NAME[c],width=15, justify='center')
 		#if(iname.get() != I_NAME[c] and iname.get() != ""):
 		#	I_NAME[c] = iname.get()
 		#	print("New I_NAME at " + str(c) + " " + I_NAME[c])
 		iname.delete(0,END)
 		iname.insert(0, I_NAME[c])
-		iname.grid(row=r,column=2)
+		iname.grid(row=(c + 5),column=2)
 		Label(text=MODE[c],width=15).grid(row=r,column=3)
 		Label(text=FCTN[c],width=15).grid(row=r,column=4)
 		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
-		r = r + 1
 
-    
 root = Tk()
 root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number])
 menu = Menu(root)
