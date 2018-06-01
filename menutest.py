@@ -142,8 +142,8 @@ def Refresh_CHAN():
 		iname.delete(0,END)
 		iname.insert(0, I_NAME[c])
 		iname.grid(row=row_offset,column=2)
-		Label(text=MODE[c],width=15).grid(row=r,column=3)
-		Label(text=FCTN[c],width=15).grid(row=r,column=4)
+		Label(text=MODE[c],width=15).grid(row=row_offset,column=3)
+		Label(text=FCTN[c],width=15).grid(row=row_offset,column=4)
 		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
 
 root = Tk()
