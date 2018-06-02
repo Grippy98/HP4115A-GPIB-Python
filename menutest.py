@@ -1,3 +1,7 @@
+#See page 133ish of Programmer's Manual
+#See page 157
+#Also See: http://sine.ni.com/apps/utf8/niid_web_display.model_page?p_model_id=1135
+
 from tkinter import *
 #from tkFileDialog   import askopenfilename
 
