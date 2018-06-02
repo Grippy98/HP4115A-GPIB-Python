@@ -1,7 +1,7 @@
 from tkinter import *
 #from tkFileDialog   import askopenfilename
 
-import visa
+import visa #PyVisa Library for GPIB Communication using National Instruments VISA Backend
 rm = visa.ResourceManager()
 devices = rm.list_resources()
 
@@ -146,12 +146,13 @@ def Refresh_CHAN():
 		Label(text=FCTN[c],width=15).grid(row=row_offset,column=4)
 		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
 
+#Now to create the actaul GUI window
 root = Tk()
-root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number])
-menu = Menu(root)
-root.config(menu=menu)
-filemenu = Menu(menu)
-menu.add_cascade(label="File", menu=filemenu)
+root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number]) #Window Title
+menu = Menu(root) #Create window menu
+root.config(menu=menu) #Config menu? 
+filemenu = Menu(menu) #File menu
+menu.add_cascade(label="File", menu=filemenu) #The next 4-5 lines are semi-placeholder right now. Need organization TODO
 filemenu.add_command(label="New", command=NewFile)
 filemenu.add_command(label="Open...", command=OpenFile)
 filemenu.add_separator()
@@ -168,8 +169,10 @@ filemenu.add_command(label="Display Menu", command=root.quit)
 filemenu.add_command(label="???", command=root.quit)
 filemenu.add_command(label="Exit", command=root.quit)
 
-channel_definition = "V-I curve"
+channel_definition = "V-I curve" #This should be able to be changed, but instrument doesn't reply to commands I'm trying to apply.
 
+#The following 4 work right now, because they're the defaults, and they get updated regardless
+#But going forward, I do want to change these to the object type definitions
 UNIT = ["SMU1:MP", "SMU2:MP", "SMU3:MP", "SMU4:MP", "VSU1", "VSU2", "VMU1", "VMU2"]
 V_NAME = ["V1", "V2", "V3", "V4", "VSU1", "VSU2", "VMU1", "VMU2"]
 I_NAME = ["I1", "I2", "I3", "I4", "---- ----", "---- ----", "---- ----", "---- ----"]
@@ -177,10 +180,9 @@ MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
 FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
 
 #Pull In Initial Data
-
 Refresh_CHAN()
 
-
+#Now to draw the actual GUI
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
 receivedBox = Entry(bg="white", relief=SUNKEN,width=50)
 receivedBox.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\"", "").replace("}"," ").replace("\\", "")) #This is the type of line that requires documentation. Not gonna lie, It's a bunch of BS that shouldn't work but does. Thanks Python <3
@@ -189,11 +191,13 @@ writebutton = Button(root, text='Write', width=15, command=UpdateCOMM).grid(row=
 refreshbutton =  Button(root, text='Refresh', width=15, command=Refresh_CHAN).grid(row=0, column=5)
 writeAllButton = Button(root, text='Write ALL', width=30, command=Refresh_CHAN).grid(row=0, column=6, columnspan=2, rowspan =2)
 
-choices = ("SWEEP", "TBD")
-var = StringVar(root)
+choices = ("SWEEP", "TBD") #Can't seem to get it out of Sweep mode with the current command set
+var = StringVar(root) #These two lines are a little hacky right now, should look into simplifying.
 v_name_var = StringVar(root)
 var.set(getData(":PAGE:CHAN:MODE?").split()) #Taking advantage of split() with empty parameters to remove white spaces
-measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky="ew")
+measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky="ew") #I forget what the Stic
+
+#The following are just more formatting
 
 Label(text="    *MEASUREMENT MODE",width=30).grid(row=2,column=0)
 Label(text=" *CHANNELS",width=15).grid(row=3,column=0)
@@ -204,6 +208,8 @@ Label(text="MODE", relief=RIDGE,width=15).grid(row=4,column=3)
 Label(text="FUNCTION", relief=RIDGE,width=15).grid(row=4,column=4)
 Label(text="STANDBY", relief=RIDGE,width=15).grid(row=4,column=5)
 
+#The following govern manual GPIB command insertion
+
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
 to_write = Entry(bg="white", relief=SUNKEN,width=75)
 to_write.grid(row=15,column=1, columnspan = 5)
@@ -211,7 +217,6 @@ print(to_write.get())
 force_write_button = Button(root, text='GPIB Write', width=30, height=2, command=WriteQuery).grid(row=15, column=6, rowspan=2)
 
 
-Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0)
+Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0) #Box to display instrument response
 
-
-mainloop()
+mainloop() #Part of the TK object
