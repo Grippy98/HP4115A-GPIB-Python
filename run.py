@@ -186,7 +186,6 @@ measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky=
 
 Label(text="    *MEASUREMENT MODE",width=30).grid(row=2,column=0)
 Label(text=" *CHANNELS",width=15).grid(row=3,column=0)
-ttk.Separator(self, orient="horizontal").grid(row=4, sticky="ns")
 Label(text="UNIT", relief=RIDGE,width=30).grid(row=4,column=0)
 Label(text="VNAME", relief=RIDGE,width=15).grid(row=4,column=1)
 Label(text="INAME", relief=RIDGE,width=15).grid(row=4,column=2)
@@ -208,6 +207,6 @@ print(to_write.get())
 force_write_button = Button(root, text='GPIB Write', width=30, height=2, command=WriteQuery).grid(row=15, column=6, rowspan=2)
 
 
-Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0) #Box to display instrument response
+Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0, rowspan= 3) #Box to display instrument response
 
 mainloop() #Part of the TK object
