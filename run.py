@@ -193,7 +193,7 @@ receivedBox.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\""
 receivedBox.grid(row=0,column=1,columnspan = 3)
 writebutton = Button(root, text='Write', width=15, command=UpdateCOMM).grid(row=0, column=4)
 refreshbutton =  Button(root, text='Refresh', width=15, command=Refresh_CHAN).grid(row=0, column=5)
-writeAllButton = Button(root, text='Write ALL', width=30, command=Refresh_CHAN).grid(row=0, column=6, columnspan=2, rowspan =2)
+writeAllButton = Button(root, text='Write ALL', width=20, command=Refresh_CHAN).grid(row=0, column=6, columnspan=2, rowspan =2)
 
 choices = ("SWEEP", "TBD") #Can't seem to get it out of Sweep mode with the current command set
 var = StringVar(root) #These two lines are a little hacky right now, should look into simplifying.
@@ -213,8 +213,10 @@ Label(text="FUNCTION", relief=RIDGE,width=15).grid(row=4,column=4)
 Label(text="STANDBY", relief=RIDGE,width=15).grid(row=4,column=5)
 
 Label(text="SERIES\nRESISTANCE", relief=RIDGE,width=15).grid(row=4,column=6)
+Label(text="0 ohm",width=15).grid(row=5,column=6)
 Label(text="0 ohm",width=15).grid(row=6,column=6)
-Label(text="0 ohm",width=15).grid(row=7,column=6)
+Label(text="-- --",width=15).grid(row=11,column=6)
+Label(text="-- --",width=15).grid(row=12,column=6)
 #The following govern manual GPIB command insertion
 
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
