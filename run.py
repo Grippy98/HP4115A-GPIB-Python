@@ -153,25 +153,6 @@ def Refresh_CHAN():
 #Now to create the actaul GUI window
 root = Tk()
 root.title("Device: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number]) #Window Title
-menu = Menu(root) #Create window menu
-root.config(menu=menu) #Config menu? 
-filemenu = Menu(menu) #File menu
-menu.add_cascade(label="File", menu=filemenu) #The next 4-5 lines are semi-placeholder right now. Need organization TODO
-filemenu.add_command(label="New", command=NewFile)
-filemenu.add_command(label="Open...", command=OpenFile)
-filemenu.add_separator()
-filemenu.add_command(label="Exit", command=root.quit)
-
-helpmenu = Menu(menu)
-menu.add_cascade(label="Help", menu=helpmenu)
-helpmenu.add_command(label="About...", command=About)
-
-gomenu = Menu(menu)
-menu.add_cascade(label="Go", menu=gomenu)
-filemenu.add_command(label="Channel Menu", command=root.quit)
-filemenu.add_command(label="Display Menu", command=root.quit)
-filemenu.add_command(label="???", command=root.quit)
-filemenu.add_command(label="Exit", command=root.quit)
 
 channel_definition = "V-I curve" #This should be able to be changed, but instrument doesn't reply to commands I'm trying to apply.
 
