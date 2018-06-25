@@ -152,7 +152,7 @@ def Refresh_CHAN():
 
 #Now to create the actaul GUI window
 root = Tk()
-root.title("HP4155A: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number]) #Window Title
+root.title("Device: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number]) #Window Title
 menu = Menu(root) #Create window menu
 root.config(menu=menu) #Config menu? 
 filemenu = Menu(menu) #File menu
@@ -212,6 +212,10 @@ Label(text="MODE", relief=RIDGE,width=15).grid(row=4,column=3)
 Label(text="FUNCTION", relief=RIDGE,width=15).grid(row=4,column=4)
 Label(text="STANDBY", relief=RIDGE,width=15).grid(row=4,column=5)
 
+Label(text="SERIES", relief=RIDGE,width=15).grid(row=4,column=6)
+Label(text="Resistance", relief=RIDGE,width=15).grid(row=5,column=6)
+Label(text="0 ohm",width=15).grid(row=6,column=6)
+Label(text="0 ohm",width=15).grid(row=6,column=6)
 #The following govern manual GPIB command insertion
 
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
