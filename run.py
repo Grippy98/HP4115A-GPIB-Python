@@ -82,8 +82,8 @@ def WriteQuery():
 		global reply #I severely questions this... need to look into when it's easier to debug
 		reply = my_instrument.read()
 		print(reply)
-		receivedBox = Label(text = reply, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
-		receivedBox.insert(reply)
+		queryBox = Label(text = reply, bg="white", relief=SUNKEN,width=75).grid(row=16,column=1, columnspan = 5)
+		queryBox.insert(reply)
 	#Nothing to really error handle, just give up on the command... this will introduce a slight delay
 	except:
 		pass
@@ -102,11 +102,11 @@ def getData(write):
 		pass
 
 def UpdateCOMM():
-	getData(":PAGE:CHAN:COMM '" +  receivedBox.get() + "'")
+	getData(":PAGE:CHAN:COMM '" +  program_description.get() + "'")
 
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
-def Refresh_CHAN():
+def Refresh_all():
 	for x in range(0,4):
 		V_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":VNAME?") 
 		I_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":INAME?") 
@@ -165,16 +165,16 @@ MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
 FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
 
 #Pull In Initial Data
-Refresh_CHAN()
+Refresh_all()
 
 #Now to draw the actual GUI
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
-receivedBox = Entry(bg="white", relief=SUNKEN,width=50)
-receivedBox.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\"", "").replace("}"," ").replace("\\", "")) #This is the type of line that requires documentation. Not gonna lie, It's a bunch of BS that shouldn't work but does. Thanks Python <3
-receivedBox.grid(row=0,column=1,columnspan = 3)
+program_description = Entry(bg="white", relief=SUNKEN,width=50)
+program_description.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\"", "").replace("}"," ").replace("\\", "")) #This is the type of line that requires documentation. Not gonna lie, It's a bunch of BS that shouldn't work but does. Thanks Python <3
+program_description.grid(row=0,column=1,columnspan = 3)
 writebutton = Button(root, text='Write', width=15, command=UpdateCOMM).grid(row=0, column=4)
-refreshbutton =  Button(root, text='Refresh', width=15, command=Refresh_CHAN).grid(row=0, column=5)
-writeAllButton = Button(root, text='Write ALL', width=20, command=Refresh_CHAN).grid(row=0, column=6, columnspan=2, rowspan =2)
+refreshbutton =  Button(root, text='Refresh', width=15, command=Refresh_all).grid(row=0, column=5)
+writeAllButton = Button(root, text='Write ALL', width=20, command=Refresh_all).grid(row=0, column=6, columnspan=2, rowspan =2)
 
 choices = ("SWEEP", "TBD") #Can't seem to get it out of Sweep mode with the current command set
 var = StringVar(root) #These two lines are a little hacky right now, should look into simplifying.
@@ -186,6 +186,7 @@ measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky=
 
 Label(text="    *MEASUREMENT MODE",width=30).grid(row=2,column=0)
 Label(text=" *CHANNELS",width=15).grid(row=3,column=0)
+ttk.Separator(self, orient="horizontal").grid(row=4, sticky="ns")
 Label(text="UNIT", relief=RIDGE,width=30).grid(row=4,column=0)
 Label(text="VNAME", relief=RIDGE,width=15).grid(row=4,column=1)
 Label(text="INAME", relief=RIDGE,width=15).grid(row=4,column=2)
