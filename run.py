@@ -125,7 +125,7 @@ def Refresh_CHAN():
 		V_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":VNAME?") 
 		#I_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":INAME?") 
 		MODE[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":MODE?") 
-		FCTN[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":FUNC?") 
+		#FCTN[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":FUNC?") 
 		pass
 
 	#Write the found vallues to the menu interface
@@ -212,10 +212,9 @@ Label(text="MODE", relief=RIDGE,width=15).grid(row=4,column=3)
 Label(text="FUNCTION", relief=RIDGE,width=15).grid(row=4,column=4)
 Label(text="STANDBY", relief=RIDGE,width=15).grid(row=4,column=5)
 
-Label(text="SERIES", relief=RIDGE,width=15).grid(row=4,column=6)
-Label(text="Resistance", relief=RIDGE,width=15).grid(row=5,column=6)
+Label(text="SERIES\nRESISTANCE", relief=RIDGE,width=15).grid(row=4,column=6)
 Label(text="0 ohm",width=15).grid(row=6,column=6)
-Label(text="0 ohm",width=15).grid(row=6,column=6)
+Label(text="0 ohm",width=15).grid(row=7,column=6)
 #The following govern manual GPIB command insertion
 
 Label(text="Force Input:", relief=RIDGE,width=30).grid(row=15,column=0)
