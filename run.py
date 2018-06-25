@@ -207,6 +207,6 @@ print(to_write.get())
 force_write_button = Button(root, text='GPIB Write', width=30, height=2, command=WriteQuery).grid(row=15, column=6, rowspan=2)
 
 
-Label(text="Instrument Response: ", relief=RIDGE,width=30).grid(row=16,column=0, rowspan= 3) #Box to display instrument response
+Label(text="Instrument Response: ", relief=RIDGE,width=30, height = 3).grid(row=16,column=0, rowspan= 3) #Box to display instrument response
 
 mainloop() #Part of the TK object
