@@ -143,14 +143,41 @@ def UpdateCOMM():
 	getData(":PAGE:CHAN:COMM '" +  program_description.get() + "'")
 
 def updateLabels():
-	SMU1.getParams().getExtendedParams().update().updateExtended()
-	SMU2.getParams().getExtendedParams().update().updateExtended()
-	SMU3.getParams().getExtendedParams().update().updateExtended()
-	SMU4.getParams().getExtendedParams().update().updateExtended()
-	VSU1.getParams().getExtendedParams().update().updateExtended()
-	VSU2.getParams().getExtendedParams().update().updateExtended()
-	VMU1.getParams().update()
-	VMU2.getParams().update()
+	SMU1.getParams().
+	SMU1.getExtendedParams().
+	SMU1.update().
+	SMU1.updateExtended()
+
+	SMU2.getParams()
+	SMU2.getExtendedParams()
+	SMU2.update()
+	SMU2.updateExtended()
+
+	SMU3.getParams()
+	SMU3.getExtendedParams()
+	SMU3.update()
+	SMU3.updateExtended()
+
+	SMU4.getParams()
+	SMU4.getExtendedParams()
+	SMU4.update()
+	SMU4.updateExtended()
+
+	VSU1.getParams()
+	VSU1.getExtendedParams()
+	VSU1.update()
+	VSU1.updateExtended()
+
+	VSU2.getParams()
+	VSU2.getExtendedParams()
+	VSU2.update()
+	VSU2.updateExtended()
+	
+	VMU1.getParams()
+	VMU1.update()
+
+	VMU2.getParams()
+	VMU2.update()
 
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
