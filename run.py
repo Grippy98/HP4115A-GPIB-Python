@@ -144,8 +144,8 @@ def UpdateCOMM():
 
 def updateLabels():
 	SMU1.getParams().
-	SMU1.getExtendedParams().
-	SMU1.update().
+	SMU1.getExtendedParams()
+	SMU1.update()
 	SMU1.updateExtended()
 
 	SMU2.getParams()
