@@ -231,4 +231,8 @@ force_write_button = Button(root, text='GPIB Write', width=30, height=2, command
 
 Label(text="Instrument Response: ", relief=RIDGE,width=30, height = 3).grid(row=16,column=0, rowspan= 3) #Box to display instrument response
 
+for x in xrange(1,10):
+	print(SMU1.vname)
+	pass
+
 mainloop() #Part of the TK object
