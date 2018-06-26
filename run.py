@@ -50,11 +50,12 @@ class MU: #Parent class, VMU is contained in here
 		self.vname_label.delete(0,END)
 		self.vname_label.insert(0,self.vname) #I have no idea why this needs to be like this, but it does
 		self.vname_label.grid(row=self.row_offset,column=1)
+		self.modes = ("V", "DVOL")
 
 		self.mode_thing = StringVar(root)
 		self.mode_thing.set(self.mode[0]) #Just so because sometimes we get empty spaces... might cause errors later
 
-		self.mode_label = OptionMenu(root, self.mode_thing, "V", "I", "???")
+		self.mode_label = OptionMenu(root, self.mode_thing, self.modes)
 		self.mode_label.grid(row=self.row_offset,column=3)
 		
 	def getParams(self):
@@ -76,6 +77,7 @@ class SMU(MU):
 		self.standby = standby
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
+		self.modes = ("V", "I", "VPU", "IPU", "COMM")
 
 	def updateExtended(self):
 		self.iname_label = Entry(text=self.iname, width=15, justify='center')
