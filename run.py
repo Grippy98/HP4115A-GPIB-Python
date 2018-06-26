@@ -66,7 +66,7 @@ class SMU(MU):
 		self.standby = standby
 		self.row = row
 
-	def update(self):
+	def updateExtended(self):
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.iname_label = Entry(text=self.iname,width=15, justify='center')
 		self.iname_label.grid(row=self.row_offset,column=2)
@@ -153,21 +153,27 @@ SMU1 = SMU("SMU1", "", "", "", "", "", 1)
 SMU1.getParams()
 SMU1.getExtendedParams()
 SMU1.update()
+SMU1.updateExtended()
 
 SMU2 = SMU("SMU2", "", "", "", "", "", 2)
 SMU2.getParams()
 SMU2.getExtendedParams()
 SMU2.update()
+SMU2.updateExtended()
+
+
 
 SMU3 = SMU("SMU3", "", "", "", "", "", 3)
 SMU3.getParams()
 SMU3.getExtendedParams()
 SMU3.update()
+SMU3.updateExtended()
 
 SMU4 = SMU("SMU4", "", "", "", "", "", 4)
 SMU4.getParams()
 SMU4.getExtendedParams()
 SMU4.update()
+SMU4.updateExtended()
 
 VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
