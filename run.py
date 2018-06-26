@@ -5,8 +5,6 @@
 from tkinter import *
 #from tkFileDialog   import askopenfilename
 
-from pprint import pprint #For debug mostly
-
 import visa #PyVisa Library for GPIB Communication using National Instruments VISA Backend
 rm = visa.ResourceManager()
 devices = rm.list_resources()
@@ -176,7 +174,30 @@ channel_definition = "V-I curve" #This should be able to be changed, but instrum
 SMU1 = SMU("SMU1", "", "", "", "", "")
 SMU1.getParams()
 SMU1.getExtendedParams()
-pprint(vars(SMU1))
+
+SMU2 = SMU("SMU2", "", "", "", "", "")
+SMU2.getParams()
+SMU2.getExtendedParams()
+
+SMU3= SMU("SMU3", "", "", "", "", "")
+SMU3.getParams()
+SMU3.getExtendedParams()
+
+SMU4= SMU("SMU4", "", "", "", "", "")
+SMU4.getParams()
+SMU4.getExtendedParams()
+
+VSU1 = VSU("VSU1", "", "", "", "")
+VSU1.getParams()
+VSU1.getExtendedParams()
+
+VSU2 = MU("VSU1", "", "")
+VSU2.getParams()
+VSU2.getExtendedParams()
+
+VMU2 = MU("VMU2", "", "")
+VMU2.getParams()
+VMU2.getExtendedParams()
 
 #The following 4 work right now, because they're the defaults, and they get updated regardless
 #But going forward, I do want to change these to the object type definitions
@@ -230,9 +251,5 @@ force_write_button = Button(root, text='GPIB Write', width=30, height=2, command
 
 
 Label(text="Instrument Response: ", relief=RIDGE,width=30, height = 3).grid(row=16,column=0, rowspan= 3) #Box to display instrument response
-
-for x in xrange(1,10):
-	print(SMU1.vname)
-	pass
 
 mainloop() #Part of the TK object
