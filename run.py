@@ -266,7 +266,7 @@ VMU1 = MU("VMU1", "", "", 7)
 VMU1.getParams()
 VMU1.update()
 
-VMU2 = MU("VMU2", "", "", 9)
+VMU2 = MU("VMU2", "", "", 8)
 VMU2.getParams()
 VMU2.update()
 
