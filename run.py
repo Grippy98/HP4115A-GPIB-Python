@@ -65,6 +65,7 @@ class SMU(MU):
 		self.standby = standby
 		self.row = row
 
+		self.row_offset = 5 + row#This is kinda archaic long term...
 		self.iname_label = Entry(text="--- ---",width=15, justify='center')
 		self.iname_label.delete(0,END)
 		self.iname_label.insert(0, "--- ---")
@@ -85,6 +86,7 @@ class VSU(MU):
 		self.function = function
 		self.standby = standby
 		self.row = row
+		self.row_offset = 5 + row#This is kinda archaic long term...
 
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
