@@ -179,6 +179,9 @@ def updateLabels():
 	VMU2.getParams()
 	VMU2.update()
 
+def writeLabels():
+
+	print(SMU1.vname_label.text())
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
 
@@ -239,7 +242,7 @@ program_description.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).repl
 program_description.grid(row=0,column=1,columnspan = 3)
 writebutton = Button(root, text='Write', width=15, command=UpdateCOMM).grid(row=0, column=4)
 refreshbutton =  Button(root, text='Refresh', width=15, command=updateLabels).grid(row=0, column=5)
-writeAllButton = Button(root, text='Write ALL', width=20, command=updateLabels).grid(row=0, column=6, columnspan=2, rowspan =2)
+writeAllButton = Button(root, text='Write ALL', width=20, command=writeLabels).grid(row=0, column=6, columnspan=2, rowspan =2)
 
 choices = ("SWEEP", "TBD") #Can't seem to get it out of Sweep mode with the current command set
 var = StringVar(root) #These two lines are a little hacky right now, should look into simplifying.
