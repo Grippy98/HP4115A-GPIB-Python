@@ -59,7 +59,7 @@ class MU: #Parent class, VMU is contained in here
 		
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")[:-1] #Because GPIB returns an extra space that then screws up commands
-		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?") 
+		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")[:-1]
 
 	def writeParams(self):
 		my_instrument.write("PAGE:CHAN:" + self.name + ":VNAME " + "\"" + self.vname + "\"")
