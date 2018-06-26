@@ -217,6 +217,8 @@ def writeLabels():
 	VMU1.vname = VMU1.vname_label.get()
 	VMU2.vname = VMU2.vname_label.get()
 
+	SMU1.mode = SMU1.mode_thing.get()
+
 	SMU1.writeParams()
 	SMU1.writeExtendedParams()
 	SMU2.writeParams()
