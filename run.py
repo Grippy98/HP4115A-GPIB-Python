@@ -63,7 +63,8 @@ class MU: #Parent class, VMU is contained in here
 
 	def writeParams(self):
 		my_instrument.write("PAGE:CHAN:" + self.name + ":VNAME " + "\"" + self.vname + "\"")
-		my_instrument.write("PAGE:CHAN:" + self.name + ":MODE " + "\"" + self.mode + "\"") 
+		my_instrument.write("PAGE:CHAN:" + self.name + ":MODE " + "\"" + self.mode + "\"")
+		print("Wrote: "+ "PAGE:CHAN:" + self.name + ":MODE " + "\"" + self.mode + "\"") 
 
 class SMU(MU):
 	def __init__(self, name, vname, iname, mode, function, standby, row):
