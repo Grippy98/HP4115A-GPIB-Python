@@ -35,19 +35,20 @@ print("\nConnected to Instrument: " + my_instrument.query('*IDN?') + "\n")
 
 #The following aren't used yet but i figured making them objects in the future makes sense
 class MU: #Parent class, VMU is contained in here
-	def __init__(self, textvariable = name, textvariable = vname, textvariable = mode, textvariable = row):
+	def __init__(self, name, vname, mode, row):
 		self.name = name
 		self.vname = vname
 		self.mode = mode
 		self.row = row
 
+
+	def update(self):
 		self.row_offset = 5 + row#This is kinda archaic long term...
 		self.unit_label = Label(text=self.name,width=15).grid(row=self.row_offset,column=0)
 		self.vname_label = Entry(text=self.vname, width=15, justify='center')
 		self.vname_label.delete(0,END)
 		self.vname_label.insert(0,self.vname)
 		self.vname_label.grid(row=self.row_offset,column=1)
-
 		self.mode_label = Label(text=self.mode,width=15).grid(row=self.row_offset,column=3)
 		
 	def getParams(self):
@@ -65,6 +66,7 @@ class SMU(MU):
 		self.standby = standby
 		self.row = row
 
+	def update(self):
 		self.row_offset = 5 + row#This is kinda archaic long term...
 		self.iname_label = Entry(text="--- ---",width=15, justify='center')
 		self.iname_label.delete(0,END)
@@ -152,18 +154,22 @@ channel_definition = "V-I curve" #This should be able to be changed, but instrum
 SMU1 = SMU("SMU1", "", "", "", "", "", 1)
 SMU1.getParams()
 SMU1.getExtendedParams()
+SMU1.update()
 
 SMU2 = SMU("SMU2", "", "", "", "", "", 2)
 SMU2.getParams()
 SMU2.getExtendedParams()
+SMU2.update()
 
-SMU3= SMU("SMU3", "", "", "", "", "", 3)
+SMU3 = SMU("SMU3", "", "", "", "", "", 3)
 SMU3.getParams()
 SMU3.getExtendedParams()
+SMU3.update()
 
-SMU4= SMU("SMU4", "", "", "", "", "", 4)
+SMU4 = SMU("SMU4", "", "", "", "", "", 4)
 SMU4.getParams()
 SMU4.getExtendedParams()
+SMU4.update()
 
 VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
@@ -175,9 +181,11 @@ VSU2.getExtendedParams()
 
 VMU1 = MU("VMU1", "", "", 7)
 VMU1.getParams()
+VMU1.update()
 
 VMU2 = MU("VMU2", "", "", 8)
 VMU2.getParams()
+VMU2.update()
 
 #Now to draw the actual GUI
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
