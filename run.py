@@ -42,6 +42,7 @@ class MU: #Parent class, VMU is contained in here
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.mode_thing = StringVar(root)
+		self.mode_thing.set(self.mode[0])
 
 	def update(self):
 		self.unit_label = Label(text=self.name,width=15)
