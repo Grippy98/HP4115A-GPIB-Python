@@ -106,6 +106,7 @@ class VSU(MU):
 		self.standby = standby
 		self.row = row
 		self.row_offset = 5 + row#This is kinda archaic long term...
+		self.modes = ["V", "DIS"]
 
 	def updateExtended(self):
 		self.function_label = Label(text=self.function,width=15)
