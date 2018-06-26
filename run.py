@@ -143,7 +143,7 @@ def UpdateCOMM():
 	getData(":PAGE:CHAN:COMM '" +  program_description.get() + "'")
 
 def updateLabels():
-	SMU1.getParams().
+	SMU1.getParams()
 	SMU1.getExtendedParams()
 	SMU1.update()
 	SMU1.updateExtended()
