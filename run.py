@@ -52,8 +52,11 @@ class MU: #Parent class, VMU is contained in here
 		
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")
-		#self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?") 
+
+	def writeParams(self):
+		my_instrument.write("PAGE:CHAN:" + self.name + ":VNAME " + "\"" + self.vname + "\"")
+		my_instrument.write("PAGE:CHAN:" + self.name + ":MODE " + "\"" + self.mode + "\"") 
 
 class SMU(MU):
 	def __init__(self, name, vname, iname, mode, function, standby, row):
@@ -72,10 +75,13 @@ class SMU(MU):
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
 
 	def getExtendedParams(self):
-		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")
 		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
+
+	def writeExtendedParams(self):
+		my_instrument.write("PAGE:CHAN:" + self.name + ":INAME " + "\"" + self.mode + "\"") 
+		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + "\"" + self.function + "\"") 
 
 class VSU(MU):
 	def __init__(self, name, vname, mode, function, standby, row):
@@ -93,7 +99,11 @@ class VSU(MU):
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
-		
+	
+	def writeExtendedParams(self):
+		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + "\"" + self.function + "\"") 
+
+
 reply = "NONE" #Default reply from the instrument... in case it doesn't actually reply any data
 
 def getChan(): #Displays Channel Data
@@ -185,14 +195,14 @@ def writeLabels():
 	SMU3.vname = SMU3.vname_label.get()
 	SMU4.vname = SMU4.vname_label.get()
 
-	SMU1.update()
-	SMU1.updateExtended()
-	SMU2.update()
-	SMU2.updateExtended()
-	SMU3.update()
-	SMU3.updateExtended()
-	SMU4.update()
-	SMU4.updateExtended()
+	SMU1.writeParams()
+	SMU1.writeExtendedParams()
+	SMU2.writeParams()
+	SMU2.writeExtendedParams()
+	SMU3.writeParams()
+	SMU3.writeExtendedParams()
+	SMU4.writeParams()
+	SMU4.writeExtendedParams()
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
 
