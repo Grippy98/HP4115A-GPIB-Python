@@ -226,25 +226,25 @@ root.title("Device: " + my_instrument.query('*IDN?') + " - on Interface: " + dev
 
 channel_definition = "V-I curve" #This should be able to be changed, but instrument doesn't reply to commands I'm trying to apply.
 
-SMU1 = SMU("SMU1", "", "", "", "", "", 1)
+SMU1 = SMU("SMU1", "", "I1", "", "", "", 1)
 SMU1.getParams()
 SMU1.getExtendedParams()
 SMU1.update()
 SMU1.updateExtended()
 
-SMU2 = SMU("SMU2", "", "", "", "", "", 2)
+SMU2 = SMU("SMU2", "", "I2", "", "", "", 2)
 SMU2.getParams()
 SMU2.getExtendedParams()
 SMU2.update()
 SMU2.updateExtended()
 
-SMU3 = SMU("SMU3", "", "", "", "", "", 3)
+SMU3 = SMU("SMU3", "", "I3", "", "", "", 3)
 SMU3.getParams()
 SMU3.getExtendedParams()
 SMU3.update()
 SMU3.updateExtended()
 
-SMU4 = SMU("SMU4", "", "", "", "", "", 4)
+SMU4 = SMU("SMU4", "", "I4", "", "", "", 4)
 SMU4.getParams()
 SMU4.getExtendedParams()
 SMU4.update()
