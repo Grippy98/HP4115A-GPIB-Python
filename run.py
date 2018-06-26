@@ -142,6 +142,24 @@ def getData(write):
 def UpdateCOMM():
 	getData(":PAGE:CHAN:COMM '" +  program_description.get() + "'")
 
+def updateLabels():
+	SMU1.update()
+	SMU1.updateExtended()
+	SMU2.update()
+	SMU2.updateExtended()
+	SMU3.update()
+	SMU3.updateExtended()
+	SMU4.update()
+	SMU4.updateExtended()
+	VSU1.update()
+	VSU1.updateExtended()
+	VSU2.update()
+	VSU2.updateExtended()
+	VMU1.getParams()
+	VMU1.update()
+	VMU2.getParams()
+	VMU2.update()
+
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
 
@@ -201,8 +219,8 @@ program_description = Entry(bg="white", relief=SUNKEN,width=50)
 program_description.insert(0, ' '.join(getData(":PAGE:CHAN:COMM?").split()).replace("\"", "").replace("}"," ").replace("\\", "")) #This is the type of line that requires documentation. Not gonna lie, It's a bunch of BS that shouldn't work but does. Thanks Python <3
 program_description.grid(row=0,column=1,columnspan = 3)
 writebutton = Button(root, text='Write', width=15, command=UpdateCOMM).grid(row=0, column=4)
-refreshbutton =  Button(root, text='Refresh', width=15, command=UpdateCOMM).grid(row=0, column=5)
-writeAllButton = Button(root, text='Write ALL', width=20, command=UpdateCOMM).grid(row=0, column=6, columnspan=2, rowspan =2)
+refreshbutton =  Button(root, text='Refresh', width=15, command=updateLabels).grid(row=0, column=5)
+writeAllButton = Button(root, text='Write ALL', width=20, command=updateLabels).grid(row=0, column=6, columnspan=2, rowspan =2)
 
 choices = ("SWEEP", "TBD") #Can't seem to get it out of Sweep mode with the current command set
 var = StringVar(root) #These two lines are a little hacky right now, should look into simplifying.
