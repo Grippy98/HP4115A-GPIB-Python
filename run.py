@@ -35,24 +35,42 @@ print("\nConnected to Instrument: " + my_instrument.query('*IDN?') + "\n")
 
 #The following aren't used yet but i figured making them objects in the future makes sense
 class MU: #Parent class, VMU is contained in here
-	def __init__(self, name, vname, mode):
+	def __init__(self, name, vname, mode, row):
 		self.name = name
 		self.vname = vname
 		self.mode = mode
+		self.row = row
 
+		self.row_offset = 5 + row#This is kinda archaic long term...
+		self.unit_label = Label(text=self.name,width=15).grid(row=self.row_offset,column=0)
+		self.vname_label = Entry(text=self.vname, width=15, justify='center')
+		self.vname_label.delete(0,END)
+		self.vname_label.insert(0,self.vname)
+		self.vname_label.grid(row=self.row_offset,column=1)
+
+		self.mode_label = Label(text=self.mode,width=15).grid(row=self.row_offset,column=3)
+		
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")
 		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?") 
 
 class SMU(MU):
-	def __init__(self, name, vname, iname, mode, function, standby):
+	def __init__(self, name, vname, iname, mode, function, standby, row):
 		self.name = name
 		self.vname = vname
 		self.iname = iname
 		self.mode = mode
 		self.function = function
 		self.standby = standby
+		self.row = row
+
+		self.iname_label = Entry(text="--- ---",width=15, justify='center')
+		self.iname_label.delete(0,END)
+		self.iname_label.insert(0, "--- ---")
+		self.iname_label.grid(row=row_offset,column=2)
+		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
+
 
 	def getExtendedParams(self):
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")
@@ -60,12 +78,13 @@ class SMU(MU):
 		self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
 class VSU(MU):
-	def __init__(self, name, vname, mode, function, standby):
+	def __init__(self, name, vname, mode, function, standby, row):
 		self.name = name
 		self.vname = vname
 		self.mode = mode
 		self.function = function
 		self.standby = standby
+		self.row = row
 
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
@@ -206,7 +225,7 @@ MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
 FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
 
 #Pull In Initial Data
-Refresh_all()
+#Refresh_all()
 
 #Now to draw the actual GUI
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
