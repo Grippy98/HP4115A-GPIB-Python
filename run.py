@@ -42,7 +42,7 @@ class MU: #Parent class, VMU is contained in here
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.modes = ["V", "DVOL"]
-		self.functions = ["VAR1", "VAT2", "VARD", "CONS"]
+		self.functions = ["VAR1", "VAR2", "VARD", "CONS"]
 
 	def update(self):
 		self.unit_label = Label(text=self.name,width=15)
@@ -243,6 +243,17 @@ def writeLabels():
 
 	VMU1.mode = VMU1.mode_thing.get()
 	VMU2.mode = VMU2.mode_thing.get()
+
+	SMU1.function = SMU1.function_thing.get()
+	SMU2.function = SMU2.function_thing.get()
+	SMU3.function = SMU3.function_thing.get()
+	SMU4.function = SMU4.function_thing.get()
+
+	VSU1.function = VSU1.function_thing.get()
+	VSU2.function = VSU2.function_thing.get()
+
+	VMU1.function = VMU1.function_thing.get()
+	VMU2.function = VMU2.function_thing.get()
 
 	SMU1.writeParams()
 	SMU1.writeExtendedParams()
