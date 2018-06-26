@@ -35,7 +35,7 @@ print("\nConnected to Instrument: " + my_instrument.query('*IDN?') + "\n")
 
 #The following aren't used yet but i figured making them objects in the future makes sense
 class MU: #Parent class, VMU is contained in here
-	def __init__(self, name, vname, mode, row):
+	def __init__(self, textvariable = name, textvariable = vname, textvariable = mode, textvariable = row):
 		self.name = name
 		self.vname = vname
 		self.mode = mode
