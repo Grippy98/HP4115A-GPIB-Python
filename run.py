@@ -68,7 +68,7 @@ class SMU(MU):
 		self.iname_label = Entry(text="--- ---",width=15, justify='center')
 		self.iname_label.delete(0,END)
 		self.iname_label.insert(0, "--- ---")
-		self.iname_label.grid(row=row_offset,column=2)
+		self.iname_label.grid(row=self.row_offset,column=2)
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
 
 
