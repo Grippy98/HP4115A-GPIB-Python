@@ -58,7 +58,7 @@ class MU: #Parent class, VMU is contained in here
 		self.mode_label.grid(row=self.row_offset,column=3)
 		
 	def getParams(self):
-		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")
+		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")[:-1] #Because GPIB returns an extra space that then screws up commands
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?") 
 
 	def writeParams(self):
@@ -86,7 +86,7 @@ class SMU(MU):
 
 		#There's something wrong here but I'm not sure why. Iname blanks on refresh but writes work fine
 	def getExtendedParams(self):
-		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
+		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?")[:-1] #Because GPIB returns a space we don't want
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
