@@ -193,11 +193,9 @@ VSU1.getExtendedParams()
 
 VSU2 = MU("VSU1", "", "")
 VSU2.getParams()
-VSU2.getExtendedParams()
 
 VMU2 = MU("VMU2", "", "")
 VMU2.getParams()
-VMU2.getExtendedParams()
 
 #The following 4 work right now, because they're the defaults, and they get updated regardless
 #But going forward, I do want to change these to the object type definitions
