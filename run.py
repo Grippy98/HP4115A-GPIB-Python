@@ -46,7 +46,7 @@ class MU: #Parent class, VMU is contained in here
 		self.mode = getData("PAGE:CHAN:" + name + ":MODE?") 
 
 class SMU(MU):
-	def __init__(self, name, vname, iname, mode, function, standby)
+	def __init__(self, name, vname, iname, mode, function, standby):
 		self.name = name
 		self.vname = vname
 		self.iname = iname
