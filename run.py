@@ -173,7 +173,7 @@ root.title("Device: " + my_instrument.query('*IDN?') + " - on Interface: " + dev
 
 channel_definition = "V-I curve" #This should be able to be changed, but instrument doesn't reply to commands I'm trying to apply.
 
-SMU1 = SMU()
+SMU1 = SMU("SMU1", "", "", "", "", "")
 SMU1.getParams()
 SMU1.getExtendedParams()
 pprint(vars(SMU1))
