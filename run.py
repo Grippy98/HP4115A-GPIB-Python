@@ -252,9 +252,6 @@ def writeLabels():
 	VSU1.function = VSU1.function_thing.get()
 	VSU2.function = VSU2.function_thing.get()
 
-	VMU1.function = VMU1.function_thing.get()
-	VMU2.function = VMU2.function_thing.get()
-
 	SMU1.writeParams()
 	SMU1.writeExtendedParams()
 	SMU2.writeParams()
