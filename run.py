@@ -70,7 +70,8 @@ class SMU(MU):
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 
 	def updateExtended(self):
-		self.iname_label = Entry(text=self.iname,width=15, justify='center').grid(row=self.row_offset,column=2)
+		self.iname_label = Entry(text=self.iname,width=15, justify='center')
+		self.iname_label.grid(row=self.row_offset,column=2)
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
 
 	def getExtendedParams(self):
@@ -195,7 +196,7 @@ def writeLabels():
 	SMU4.vname = SMU4.vname_label.get()
 
 	SMU1.iname = SMU1.iname_label.get()
-	SMU2.iname = SMU2.inamelabel.get()
+	SMU2.iname = SMU2.iname_label.get()
 	SMU3.iname = SMU3.iname_label.get()
 	SMU4.iname= SMU4.iname_label.get()
 
