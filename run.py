@@ -80,7 +80,7 @@ class SMU(MU):
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
 	def writeExtendedParams(self):
-		my_instrument.write("PAGE:CHAN:" + self.name + ":INAME " + "\"" + self.mode + "\"") 
+		my_instrument.write("PAGE:CHAN:" + self.name + ":INAME " + "\"" + self.iname + "\"") 
 		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + "\"" + self.function + "\"") 
 
 class VSU(MU):
