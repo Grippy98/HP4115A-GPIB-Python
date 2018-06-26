@@ -54,7 +54,7 @@ class SMU(MU):
 		self.iname = iname
 		self.mode = mode
 		self.function = function
-		self.standby = stndby
+		self.standby = standby
 
 	def getExtendedParams(self):
 		self.mode = getData("PAGE:CHAN:" + name + ":MODE?")
