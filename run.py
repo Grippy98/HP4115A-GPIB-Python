@@ -72,7 +72,6 @@ class SMU(MU):
 		self.iname_label.grid(row=self.row_offset,column=2)
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
 
-
 	def getExtendedParams(self):
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")
 		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
@@ -143,49 +142,6 @@ def UpdateCOMM():
 
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
-def Refresh_all():
-	for x in range(0,4):
-		V_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":VNAME?") 
-		I_NAME[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":INAME?") 
-		MODE[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":MODE?") 
-		FCTN[x] = getData("PAGE:CHAN:SMU" + str(x+1) + ":FUNC?") 
-		pass
-
-	for x in range(0,2):
-		V_NAME[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":VNAME?") 
-		#I_NAME[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":INAME?") 
-		MODE[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":MODE?") 
-		FCTN[x+4] = getData("PAGE:CHAN:VSU" + str(x+1) + ":FUNC?") 
-		pass
-
-	for x in range(0,2):
-		V_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":VNAME?") 
-		#I_NAME[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":INAME?") 
-		MODE[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":MODE?") 
-		#FCTN[x+6] = getData("PAGE:CHAN:VMU" + str(x+1) + ":FUNC?") 
-		pass
-
-	#Write the found vallues to the menu interface
-	#Note c + 5 is used as a offset
-	for c in range(0, len(UNIT)):
-		#var.set(choices[0])
-		row_offset = c + 5
-		Label(text=UNIT[c],width=15).grid(row=row_offset,column=0)
-		vname = Entry(text=V_NAME[c], width=15, justify='center')
-		#V_NAME[c] = vname.get()
-		vname.delete(0,END)
-		vname.insert(0, V_NAME[c])
-		vname.grid(row=row_offset,column=1)
-		iname = Entry(text=I_NAME[c],width=15, justify='center')
-		#if(iname.get() != I_NAME[c] and iname.get() != ""):
-		#	I_NAME[c] = iname.get()
-		#	print("New I_NAME at " + str(c) + " " + I_NAME[c])
-		iname.delete(0,END)
-		iname.insert(0, I_NAME[c])
-		iname.grid(row=row_offset,column=2)
-		Label(text=MODE[c],width=15).grid(row=row_offset,column=3)
-		Label(text=FCTN[c],width=15).grid(row=row_offset,column=4)
-		#button = Button(root, text='Stop', width=25, command=root.destroy).grid(row=r, column=6)
 
 #Now to create the actaul GUI window
 root = Tk()
@@ -213,22 +169,15 @@ VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
 VSU1.getExtendedParams()
 
-VSU2 = MU("VSU1", "", "", 6)
+VSU2 = VSU("VSU2", "", "", 6)
 VSU2.getParams()
+VSU2.getExtendedParams()
 
-VMU2 = MU("VMU2", "", "", 7)
+VMU1 = MU("VMU1", "", "", 7)
+VMU1.getParams()
+
+VMU2 = MU("VMU2", "", "", 8)
 VMU2.getParams()
-
-#The following 4 work right now, because they're the defaults, and they get updated regardless
-#But going forward, I do want to change these to the object type definitions
-UNIT = ["SMU1:MP", "SMU2:MP", "SMU3:MP", "SMU4:MP", "VSU1", "VSU2", "VMU1", "VMU2"]
-V_NAME = ["V1", "V2", "V3", "V4", "VSU1", "VSU2", "VMU1", "VMU2"]
-I_NAME = ["I1", "I2", "I3", "I4", "---- ----", "---- ----", "---- ----", "---- ----"]
-MODE = ["COMMON", "I", "V", "V", "V", "V", "V", "V"]
-FCTN = ["CONST", "CONST", "CONST", "CONST", "CONST", "CONST", "---- ----", "---- ----"]
-
-#Pull In Initial Data
-#Refresh_all()
 
 #Now to draw the actual GUI
 Label(text="CHANNELS: CHANNEL DEFINITION",width=30).grid(row=0,column=0)
