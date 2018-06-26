@@ -161,8 +161,6 @@ SMU2.getExtendedParams()
 SMU2.update()
 SMU2.updateExtended()
 
-
-
 SMU3 = SMU("SMU3", "", "", "", "", "", 3)
 SMU3.getParams()
 SMU3.getExtendedParams()
@@ -178,10 +176,12 @@ SMU4.updateExtended()
 VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
 VSU1.getExtendedParams()
+VSU1.update()
 
 VSU2 = VSU("VSU2", "", "", "", "", 6)
 VSU2.getParams()
 VSU2.getExtendedParams()
+VSU2.update()
 
 VMU1 = MU("VMU1", "", "", 7)
 VMU1.getParams()
