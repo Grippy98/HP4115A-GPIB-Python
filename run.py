@@ -88,6 +88,10 @@ class VSU(MU):
 		self.row = row
 		self.row_offset = 5 + row#This is kinda archaic long term...
 
+	def updateExtended(self):
+		self.row_offset = 5 + self.row#This is kinda archaic long term...
+		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
+
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
@@ -177,11 +181,13 @@ VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
 VSU1.getExtendedParams()
 VSU1.update()
+VSU1.updateExtended()
 
 VSU2 = VSU("VSU2", "", "", "", "", 6)
 VSU2.getParams()
 VSU2.getExtendedParams()
 VSU2.update()
+VSU2.updateExtended()
 
 VMU1 = MU("VMU1", "", "", 7)
 VMU1.getParams()
