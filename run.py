@@ -5,6 +5,8 @@
 from tkinter import *
 #from tkFileDialog   import askopenfilename
 
+from pprint import pprint #For debug mostly
+
 import visa #PyVisa Library for GPIB Communication using National Instruments VISA Backend
 rm = visa.ResourceManager()
 devices = rm.list_resources()
@@ -59,8 +61,7 @@ class SMU(MU):
 		self.function = getData("PAGE:CHAN:" + name + ":FUNC?") 
 		self.standby = getData("PAGE:CHAN:" + name + ":STBY?") #??? This might not work 
 
-
-class VSU:
+class VSU(MU):
 	def __init__(self, name, vname, mode, function, standby):
 		self.name = name
 		self.vname = vname
@@ -73,7 +74,6 @@ class VSU:
 		self.standby = getData("PAGE:CHAN:" + name + ":STBY?")
 		
 reply = "NONE" #Default reply from the instrument... in case it doesn't actually reply any data
-
 
 def getChan(): #Displays Channel Data
 	my_instrument.write(":PAGE:CHAN")
@@ -172,6 +172,11 @@ root = Tk()
 root.title("Device: " + my_instrument.query('*IDN?') + " - on Interface: " + devices[device_number]) #Window Title
 
 channel_definition = "V-I curve" #This should be able to be changed, but instrument doesn't reply to commands I'm trying to apply.
+
+SMU1 = SMU()
+SMU1.getParams()
+SMU1.getExtendedParams()
+pprint(vars(SMU1))
 
 #The following 4 work right now, because they're the defaults, and they get updated regardless
 #But going forward, I do want to change these to the object type definitions
