@@ -43,12 +43,14 @@ class MU: #Parent class, VMU is contained in here
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 
 	def update(self):
-		self.unit_label = Label(text=self.name,width=15).grid(row=self.row_offset,column=0)
+		self.unit_label = Label(text=self.name,width=15)
+		self.unit_label.grid(row=self.row_offset,column=0) #It's importnat .grid is done in separate lines to conserve types
 		self.vname_label = Entry(text=self.vname, width=15, justify='center')
 		self.vname_label.delete(0,END)
 		self.vname_label.insert(0,self.vname)
 		self.vname_label.grid(row=self.row_offset,column=1)
-		self.mode_label = Label(text=self.mode,width=15).grid(row=self.row_offset,column=3)
+		self.mode_label = Label(text=self.mode,width=15)
+		self.mode_label.grid(row=self.row_offset,column=3)
 		
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")
@@ -72,8 +74,10 @@ class SMU(MU):
 	def updateExtended(self):
 		self.iname_label = Entry(text=self.iname,width=15, justify='center')
 		self.iname_label.grid(row=self.row_offset,column=2)
-		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
+		self.function_label = Label(text=self.function,width=15)
+		self.function_label.grid(row=self.row_offset,column=4)
 
+		#There's something wrong here but I'm not sure why. Iname blanks on refresh but writes work fine
 	def getExtendedParams(self):
 		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
@@ -94,7 +98,8 @@ class VSU(MU):
 		self.row_offset = 5 + row#This is kinda archaic long term...
 
 	def updateExtended(self):
-		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
+		self.function_label = Label(text=self.function,width=15)
+		self.function_label.grid(row=self.row_offset,column=4)
 
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
