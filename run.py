@@ -51,8 +51,8 @@ class MU: #Parent class, VMU is contained in here
 		self.vname_label.insert(0,self.vname) #I have no idea why this needs to be like this, but it does
 		self.vname_label.grid(row=self.row_offset,column=1)
 
-		mode_thing = StringVar(root)
-		mode_thing.set(self.mode[0]) #Just so because sometimes we get empty spaces... might cause errors later
+		self.mode_thing = StringVar(root)
+		self.mode_thing.set(self.mode[0]) #Just so because sometimes we get empty spaces... might cause errors later
 
 		self.mode_label = OptionMenu(root, mode_thing, "V", "I", "???")
 		self.mode_label.grid(row=self.row_offset,column=3)
