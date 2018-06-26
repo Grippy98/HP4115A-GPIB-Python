@@ -169,7 +169,7 @@ VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
 VSU1.getExtendedParams()
 
-VSU2 = VSU("VSU2", "", "", 6)
+VSU2 = VSU("VSU2", "", "", "", "", 6)
 VSU2.getParams()
 VSU2.getExtendedParams()
 
