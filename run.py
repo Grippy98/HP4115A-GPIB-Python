@@ -81,7 +81,7 @@ class SMU(MU):
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.modes = ["V", "I", "VPU", "IPU", "COMM"]
-		self.functions = ["VAR1", "VAT2", "VARD", "CONS"]
+		self.functions = ["VAR1", "VAR2", "VARD", "CONS"]
 
 	def updateExtended(self):
 		self.iname_label = Entry(text=self.iname, width=15, justify='center')
@@ -103,7 +103,7 @@ class SMU(MU):
 
 	def writeExtendedParams(self):
 		my_instrument.write("PAGE:CHAN:" + self.name + ":INAME " + "\"" + self.iname + "\"") 
-		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + "\"" + self.function + "\"") 
+		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + self.function) 
 
 class VSU(MU):
 	def __init__(self, name, vname, mode, function, standby, row):
@@ -129,7 +129,7 @@ class VSU(MU):
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
 	
 	def writeExtendedParams(self):
-		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + "\"" + self.function + "\"") 
+		my_instrument.write("PAGE:CHAN:" + self.name + ":FUNC " + self.function) 
 
 
 reply = "NONE" #Default reply from the instrument... in case it doesn't actually reply any data
