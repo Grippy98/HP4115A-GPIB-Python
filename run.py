@@ -40,10 +40,9 @@ class MU: #Parent class, VMU is contained in here
 		self.vname = vname
 		self.mode = mode
 		self.row = row
-
+		self.row_offset = 5 + self.row#This is kinda archaic long term...
 
 	def update(self):
-		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.unit_label = Label(text=self.name,width=15).grid(row=self.row_offset,column=0)
 		self.vname_label = Entry(text=self.vname, width=15, justify='center')
 		self.vname_label.delete(0,END)
@@ -65,9 +64,9 @@ class SMU(MU):
 		self.function = function
 		self.standby = standby
 		self.row = row
+		self.row_offset = 5 + self.row#This is kinda archaic long term...
 
 	def updateExtended(self):
-		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.iname_label = Entry(text=self.iname,width=15, justify='center')
 		self.iname_label.grid(row=self.row_offset,column=2)
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
@@ -89,7 +88,6 @@ class VSU(MU):
 		self.row_offset = 5 + row#This is kinda archaic long term...
 
 	def updateExtended(self):
-		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
 
 	def getExtendedParams(self):
