@@ -190,30 +190,30 @@ root.title("Device: " + my_instrument.query('*IDN?') + " - on Interface: " + dev
 
 channel_definition = "V-I curve" #This should be able to be changed, but instrument doesn't reply to commands I'm trying to apply.
 
-SMU1 = SMU("SMU1", "", "", "", "", "")
+SMU1 = SMU("SMU1", "", "", "", "", "", 1)
 SMU1.getParams()
 SMU1.getExtendedParams()
 
-SMU2 = SMU("SMU2", "", "", "", "", "")
+SMU2 = SMU("SMU2", "", "", "", "", "", 2)
 SMU2.getParams()
 SMU2.getExtendedParams()
 
-SMU3= SMU("SMU3", "", "", "", "", "")
+SMU3= SMU("SMU3", "", "", "", "", "", 3)
 SMU3.getParams()
 SMU3.getExtendedParams()
 
-SMU4= SMU("SMU4", "", "", "", "", "")
+SMU4= SMU("SMU4", "", "", "", "", "", 4)
 SMU4.getParams()
 SMU4.getExtendedParams()
 
-VSU1 = VSU("VSU1", "", "", "", "")
+VSU1 = VSU("VSU1", "", "", "", "", 5)
 VSU1.getParams()
 VSU1.getExtendedParams()
 
-VSU2 = MU("VSU1", "", "")
+VSU2 = MU("VSU1", "", "", 6)
 VSU2.getParams()
 
-VMU2 = MU("VMU2", "", "")
+VMU2 = MU("VMU2", "", "", 7)
 VMU2.getParams()
 
 #The following 4 work right now, because they're the defaults, and they get updated regardless
