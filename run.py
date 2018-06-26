@@ -53,7 +53,7 @@ class MU: #Parent class, VMU is contained in here
 		
 
 		self.mode_thing = StringVar(root)
-		self.mode_thing.set(self.mode[0]) #Just so because sometimes we get empty spaces... might cause errors later
+		self.mode_thing.set(self.mode)
 
 		self.mode_label = OptionMenu(root, self.mode_thing, *self.modes)
 		self.mode_label.grid(row=self.row_offset,column=3)
