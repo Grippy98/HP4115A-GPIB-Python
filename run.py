@@ -76,7 +76,7 @@ class SMU(MU):
 	def getExtendedParams(self):
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
-		self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
+		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
 class VSU(MU):
 	def __init__(self, name, vname, mode, function, standby, row):
@@ -90,7 +90,7 @@ class VSU(MU):
 
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
-		self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
+		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
 		
 reply = "NONE" #Default reply from the instrument... in case it doesn't actually reply any data
 
