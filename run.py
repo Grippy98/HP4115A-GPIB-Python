@@ -52,7 +52,7 @@ class MU: #Parent class, VMU is contained in here
 		
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")
-		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
+		#self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?") 
 
 class SMU(MU):
@@ -75,6 +75,7 @@ class SMU(MU):
 
 	def getExtendedParams(self):
 		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")
+		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
 		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
