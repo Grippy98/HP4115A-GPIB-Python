@@ -195,6 +195,11 @@ def writeLabels():
 	SMU3.vname = SMU3.vname_label.get()
 	SMU4.vname = SMU4.vname_label.get()
 
+	VSU1.vname = VSU1.vname_label.get()
+	VSU2.vname = VSU2.vname_label.get()
+	VMU1.vname = VMU1.vname_label.get()
+	VMU2.vname = VMU2.vname_label.get()
+
 	SMU1.writeParams()
 	SMU1.writeExtendedParams()
 	SMU2.writeParams()
@@ -203,6 +208,15 @@ def writeLabels():
 	SMU3.writeExtendedParams()
 	SMU4.writeParams()
 	SMU4.writeExtendedParams()
+
+	VSU1.writeParams()
+	VSU1.writeExtendedParams()
+	VSU2.writeParams()
+	VSU2.writeExtendedParams()
+
+	VMU1.writeParams()
+	VMU1.writeParams()
+
 #Function to refresh bulk channel data... goes through all of them through for loops, also writes them to UI
 #Delays are introduced when the instrument dosn't reply... so there's some room for improvement here
 
