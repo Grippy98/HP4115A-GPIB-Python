@@ -98,7 +98,7 @@ class SMU(MU):
 		#There's something wrong here but I'm not sure why. Iname blanks on refresh but writes work fine
 	def getExtendedParams(self):
 		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?")[:-1] #Because GPIB returns a space we don't want
-		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
+		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")[:-1]
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
 	def writeExtendedParams(self):
@@ -115,7 +115,7 @@ class VSU(MU):
 		self.row = row
 		self.row_offset = 5 + row#This is kinda archaic long term...
 		self.modes = ["V", "DIS"]
-		self.functions = ["VAR1", "VAT2", "VARD", "CONS"]
+		self.functions = ["VAR1", "VAR2", "VARD", "CONS"]
 
 	def updateExtended(self):
 		self.function_thing = StringVar(root)
@@ -125,7 +125,7 @@ class VSU(MU):
 		self.function_label.grid(row=self.row_offset,column=4)
 
 	def getExtendedParams(self):
-		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
+		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")[:-1]
 		#self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
 	
 	def writeExtendedParams(self):
