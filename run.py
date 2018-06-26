@@ -68,9 +68,7 @@ class SMU(MU):
 
 	def update(self):
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
-		self.iname_label = Entry(text="--- ---",width=15, justify='center')
-		self.iname_label.delete(0,END)
-		self.iname_label.insert(0, "--- ---")
+		self.iname_label = Entry(text=self.iname,width=15, justify='center')
 		self.iname_label.grid(row=self.row_offset,column=2)
 		self.function_label = Label(text=self.function,width=15).grid(row=self.row_offset,column=4)
 
