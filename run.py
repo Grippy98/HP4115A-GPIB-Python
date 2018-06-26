@@ -42,13 +42,10 @@ class MU: #Parent class, VMU is contained in here
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 
-
 	def update(self):
 		self.unit_label = Label(text=self.name,width=15)
 		self.unit_label.grid(row=self.row_offset,column=0) #It's importnat .grid is done in separate lines to conserve types
 		self.vname_label = Entry(text=self.vname, width=15, justify='center')
-		self.vname_label.delete(0,END)
-		self.vname_label.insert(0,self.vname)
 		self.vname_label.grid(row=self.row_offset,column=1)
 
 		mode_thing = StringVar(root)
