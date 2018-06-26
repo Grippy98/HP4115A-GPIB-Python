@@ -36,9 +36,9 @@ print("\nConnected to Instrument: " + my_instrument.query('*IDN?') + "\n")
 #The following aren't used yet but i figured making them objects in the future makes sense
 class MU: #Parent class, VMU is contained in here
 	def __init__(self, name, vname, mode):
-	self.name = name
-	self.vname = vname
-	self.mode = mode
+		self.name = name
+		self.vname = vname
+		self.mode = mode
 
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + name + ":VNAME?")
@@ -47,12 +47,12 @@ class MU: #Parent class, VMU is contained in here
 
 class SMU(MU):
 	def __init__(self, name, vname, iname, mode, function, standby)
-	self.name = name
-	self.vname = vname
-	self.iname = iname
-	self.mode = mode
-	self.function = function
-	self.standby = stndby
+		self.name = name
+		self.vname = vname
+		self.iname = iname
+		self.mode = mode
+		self.function = function
+		self.standby = stndby
 
 	def getExtendedParams(self):
 		self.mode = getData("PAGE:CHAN:" + name + ":MODE?")
@@ -62,11 +62,11 @@ class SMU(MU):
 
 class VSU:
 	def __init__(self, name, vname, mode, function, standby):
-	self.name = name
-	self.vname = vname
-	self.mode = mode
-	self.function = function
-	self.standby = standby
+		self.name = name
+		self.vname = vname
+		self.mode = mode
+		self.function = function
+		self.standby = standby
 
 	def getExtendedParams(self):
 		self.function = getData("PAGE:CHAN:" + name + ":FUNC?")
