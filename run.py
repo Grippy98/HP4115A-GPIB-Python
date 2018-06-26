@@ -194,6 +194,11 @@ def writeLabels():
 	SMU3.vname = SMU3.vname_label.get()
 	SMU4.vname = SMU4.vname_label.get()
 
+	SMU1.iname = SMU1.iname_label.get()
+	SMU2.iname = SMU2.inamelabel.get()
+	SMU3.iname = SMU3.iname_label.get()
+	SMU4.iname= SMU4.iname_label.get()
+
 	VSU1.vname = VSU1.vname_label.get()
 	VSU2.vname = VSU2.vname_label.get()
 	VMU1.vname = VMU1.vname_label.get()
