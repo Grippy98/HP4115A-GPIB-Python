@@ -77,7 +77,7 @@ class SMU(MU):
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 
 	def updateExtended(self):
-		self.vname_label = Entry(text=self.iname, width=15, justify='center')
+		self.iname_label = Entry(text=self.iname, width=15, justify='center')
 		self.iname_label.delete(0,END)
 		self.iname_label.insert(0,self.iname) #I have no idea why this needs to be like this, but it does
 		self.iname_label.grid(row=self.row_offset,column=2)
