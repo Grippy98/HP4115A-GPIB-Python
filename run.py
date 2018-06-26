@@ -41,7 +41,7 @@ class MU: #Parent class, VMU is contained in here
 		self.mode = mode
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
-
+		self.mode_thing = StringVar(root)
 
 	def update(self):
 		self.unit_label = Label(text=self.name,width=15)
@@ -51,7 +51,6 @@ class MU: #Parent class, VMU is contained in here
 		self.vname_label.insert(0,self.vname) #I have no idea why this needs to be like this, but it does
 		self.vname_label.grid(row=self.row_offset,column=1)
 
-		self.mode_thing = StringVar(root)
 		self.mode_thing.set(self.mode[0]) #Just so because sometimes we get empty spaces... might cause errors later
 
 		self.mode_label = OptionMenu(root, mode_thing, "V", "I", "???")
