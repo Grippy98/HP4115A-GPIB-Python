@@ -43,9 +43,9 @@ class MU: #Parent class, VMU is contained in here
 		self.mode = mode
 
 	def getParams(self):
-		self.vname = getData("PAGE:CHAN:" + name + ":VNAME?")
-		self.iname = getData("PAGE:CHAN:" + name + ":INAME?") 
-		self.mode = getData("PAGE:CHAN:" + name + ":MODE?") 
+		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")
+		self.iname = getData("PAGE:CHAN:" + self.name + ":INAME?") 
+		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?") 
 
 class SMU(MU):
 	def __init__(self, name, vname, iname, mode, function, standby):
@@ -57,9 +57,9 @@ class SMU(MU):
 		self.standby = standby
 
 	def getExtendedParams(self):
-		self.mode = getData("PAGE:CHAN:" + name + ":MODE?")
-		self.function = getData("PAGE:CHAN:" + name + ":FUNC?") 
-		self.standby = getData("PAGE:CHAN:" + name + ":STBY?") #??? This might not work 
+		self.mode = getData("PAGE:CHAN:" + self.name + ":MODE?")
+		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?") 
+		self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?") #??? This might not work 
 
 class VSU(MU):
 	def __init__(self, name, vname, mode, function, standby):
@@ -70,8 +70,8 @@ class VSU(MU):
 		self.standby = standby
 
 	def getExtendedParams(self):
-		self.function = getData("PAGE:CHAN:" + name + ":FUNC?")
-		self.standby = getData("PAGE:CHAN:" + name + ":STBY?")
+		self.function = getData("PAGE:CHAN:" + self.name + ":FUNC?")
+		self.standby = getData("PAGE:CHAN:" + self.name + ":STBY?")
 		
 reply = "NONE" #Default reply from the instrument... in case it doesn't actually reply any data
 
