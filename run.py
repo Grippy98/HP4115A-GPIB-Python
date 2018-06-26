@@ -42,6 +42,7 @@ class MU: #Parent class, VMU is contained in here
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.modes = ["V", "DVOL"]
+		self.functions = ["VAR1", "VAT2", "VARD", "CONS"]
 
 	def update(self):
 		self.unit_label = Label(text=self.name,width=15)
@@ -57,6 +58,8 @@ class MU: #Parent class, VMU is contained in here
 
 		self.mode_label = OptionMenu(root, self.mode_thing, *self.modes)
 		self.mode_label.grid(row=self.row_offset,column=3)
+
+
 		
 	def getParams(self):
 		self.vname = getData("PAGE:CHAN:" + self.name + ":VNAME?")[:-1] #Because GPIB returns an extra space that then screws up commands
@@ -65,7 +68,7 @@ class MU: #Parent class, VMU is contained in here
 	def writeParams(self):
 		my_instrument.write("PAGE:CHAN:" + self.name + ":VNAME " + "\"" + self.vname + "\"")
 		my_instrument.write("PAGE:CHAN:" + self.name + ":MODE " + self.mode)
-		print("Wrote: "+ "PAGE:CHAN:" + self.name + ":MODE " + self.mode) 
+		#print("Wrote: "+ "PAGE:CHAN:" + self.name + ":MODE " + self.mode) 
 
 class SMU(MU):
 	def __init__(self, name, vname, iname, mode, function, standby, row):
@@ -78,13 +81,18 @@ class SMU(MU):
 		self.row = row
 		self.row_offset = 5 + self.row#This is kinda archaic long term...
 		self.modes = ["V", "I", "VPU", "IPU", "COMM"]
+		self.functions = ["VAR1", "VAT2", "VARD", "CONS"]
 
 	def updateExtended(self):
 		self.iname_label = Entry(text=self.iname, width=15, justify='center')
 		self.iname_label.delete(0,END)
 		self.iname_label.insert(0,self.iname) #I have no idea why this needs to be like this, but it does
 		self.iname_label.grid(row=self.row_offset,column=2)
-		self.function_label = Label(text=self.function,width=15)
+
+		self.function_thing = StringVar(root)
+		self.function_thing.set(self.function)
+
+		self.function_label = OptionMenu(root, self.function_thing, *self.functions)
 		self.function_label.grid(row=self.row_offset,column=4)
 
 		#There's something wrong here but I'm not sure why. Iname blanks on refresh but writes work fine
@@ -107,9 +115,13 @@ class VSU(MU):
 		self.row = row
 		self.row_offset = 5 + row#This is kinda archaic long term...
 		self.modes = ["V", "DIS"]
+		self.functions = ["VAR1", "VAT2", "VARD", "CONS"]
 
 	def updateExtended(self):
-		self.function_label = Label(text=self.function,width=15)
+		self.function_thing = StringVar(root)
+		self.function_thing.set(self.function)
+
+		self.function_label = OptionMenu(root, self.function_thing, *self.functions)
 		self.function_label.grid(row=self.row_offset,column=4)
 
 	def getExtendedParams(self):
