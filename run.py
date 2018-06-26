@@ -49,7 +49,7 @@ class MU: #Parent class, VMU is contained in here
 		self.vname_label.delete(0,END)
 		self.vname_label.insert(0,self.vname)
 		self.vname_label.grid(row=self.row_offset,column=1)
-		self.mode_label = Label(text=self.mode,width=15)
+		self.mode_label = OptionMenu(root, self.mode, "V", "I", "???")
 		self.mode_label.grid(row=self.row_offset,column=3)
 		
 	def getParams(self):
@@ -293,7 +293,8 @@ choices = ("SWEEP", "TBD") #Can't seem to get it out of Sweep mode with the curr
 var = StringVar(root) #These two lines are a little hacky right now, should look into simplifying.
 v_name_var = StringVar(root)
 var.set(getData(":PAGE:CHAN:MODE?").split()) #Taking advantage of split() with empty parameters to remove white spaces
-measurement_mode = OptionMenu(root, var, *choices).grid(column=1, row=2, sticky="ew") #I forget what the Stic
+measurement_mode = OptionMenu(root, var, *choices)
+measurement_mode.grid(column=1, row=2, sticky="ew") #I forget what the Stic
 
 #The following are just more formatting
 
